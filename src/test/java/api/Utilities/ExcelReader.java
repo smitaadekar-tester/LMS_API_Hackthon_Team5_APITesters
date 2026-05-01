@@ -4,7 +4,7 @@ package api.Utilities;
 	import java.util.HashMap;
 	import java.util.Map;
 
-	import org.apache.poi.sl.usermodel.Sheet;
+	//import org.apache.poi.sl.usermodel.Sheet;
 	import org.apache.poi.ss.usermodel.DataFormatter;
 	import org.apache.poi.ss.usermodel.Row;
 	import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -12,13 +12,13 @@ package api.Utilities;
 
 	public class ExcelReader {
 
-		    public static Map<String, String> getTestData(String scenarioType) {
+		    public static Map<String, String> getTestData(String sheetname,String scenarioType) {
 		        Map<String, String> dataMap = new HashMap<>();
 
 		        try {
 		            FileInputStream fis = new FileInputStream("src/test/resources/testData/Team5Data.xlsx");
 		            XSSFWorkbook workbook = new XSSFWorkbook(fis);
-		            XSSFSheet sheet = workbook.getSheetAt(0);
+		            XSSFSheet sheet = workbook.getSheet(sheetname);
 
 		            Row headerRow = sheet.getRow(0);
 
