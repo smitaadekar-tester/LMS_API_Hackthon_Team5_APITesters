@@ -13,6 +13,7 @@ import io.cucumber.testng.CucumberOptions;
     monochrome = true,
     features = "src/test/resources/features",
     glue = {"api.StepDefinitions"}
+    //tags = "@runthis"
 )
 public class TestRunner extends AbstractTestNGCucumberTests {
 
