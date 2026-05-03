@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Maven / build
 target/
 
@@ -22,12 +22,3 @@ test-output/
 
 # OS junk (optional but good)
 .DS_Store
-=======
-allure-results/
-allure-report/
-target/
-.idea/
-*.iml
-*.log
-.allure/
->>>>>>> 5e0ad883237c968197610d0df9dca07ce6da1714
