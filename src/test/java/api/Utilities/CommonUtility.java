@@ -17,8 +17,15 @@ public class CommonUtility {
 	    public static Response response;
 	    public static LoginPojo login = new LoginPojo();
 		public static String token;
+		public static String newPassword;
 		
 		
+		public static String getNewPassword() {
+			return newPassword;
+		}
+		public static void setNewPassword(String newPassword) {
+			CommonUtility.newPassword = newPassword;
+		}
 		public static String getToken() {
 			return token;
 		}

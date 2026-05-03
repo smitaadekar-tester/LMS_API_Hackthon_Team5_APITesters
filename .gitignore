@@ -1,0 +1,23 @@
+# Maven / build
+target/
+
+# Logs
+logs/
+*.log
+
+# Compiled files
+*.class
+
+# IDE
+.idea/
+*.iml
+
+# Allure reports
+allure-results/
+allure-report/
+
+# TestNG reports
+test-output/
+
+# OS junk (optional but good)
+.DS_Store
