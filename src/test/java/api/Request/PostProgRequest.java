@@ -1,5 +1,79 @@
 package api.Request;
+import api.BaseClass.BaseClass;
+import api.Payload.ProgramPayload;
+import api.Utilities.CommonUtility;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 
-public class PostProgRequest {
+import static io.restassured.RestAssured.given;
+
+public class PostProgRequest extends BaseClass {
+    String endpoint = CommonUtility.endpoints.getString("postProgram");
+    String token = "Bearer " + CommonUtility.token;
+    String method = "POST";
+
+    public Response PostProgramRequest(String Scenario) {
+
+        if (Scenario.equalsIgnoreCase("invalid endpoint")) {
+            endpoint = "/invalidEndpoint";
+        }
+
+        if (Scenario.equalsIgnoreCase("invalid method")) {
+            method = "GET";
+        }
+        if (Scenario.equalsIgnoreCase("invalid token")) {
+            token = "Bearer InvalidToken";
+
+        }
+
+        response = given()
+                .spec(requestSpec)
+                .header("Authorization", token)
+                .body(ProgramPayload.ProgRequest(CommonUtility.endpoints.getString("postprogramsheetname"), Scenario))
+                .when()
+                .request(method, endpoint)
+                .then()
+                .log().all()
+                .extract()
+                .response();
+
+        //response.prettyPrint();
+        response.getStatusLine();
+        if (response.getStatusCode() == 201) {
+            JsonPath json = response.jsonPath();
+            CommonUtility.programId = json.getInt("programId");
+            CommonUtility.programName = json.getString("programName");
+        }
+        return response;
+    }
+
+    public Response createProgramForDeleteSetup(String Scenario) {
+
+         endpoint = CommonUtility.endpoints.getString("postProgram");
+         token = "Bearer " + CommonUtility.token;
+         method = "POST";
+        response = given()
+                .spec(requestSpec)
+                .header("Authorization", token)
+                .body(ProgramPayload.ProgRequest(CommonUtility.endpoints.getString("programsetupsheetname"), Scenario))
+                .when()
+                .request(method, endpoint)
+                .then()
+                .log().all()
+                .extract()
+                .response();
+
+        //response.prettyPrint();
+        response.getStatusLine();
+        if (response.getStatusCode() == 201) {
+            JsonPath json = response.jsonPath();
+            CommonUtility.programId = json.getInt("programId");
+            CommonUtility.programName = json.getString("programName");
+        }
+        return response;
+    }
+
+
 
 }

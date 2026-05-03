@@ -84,11 +84,13 @@ public void admin_recieves_token_with_statusCode_in_response(int expectedStatusC
 
 		assertEquals(expectedStatusCode, actualStatusCode);
 }
+
 @Given("Admin creates testData for forgot password {string}")
 public void admin_creates_test_data_for_forgot_password(String scenarioType) {
 	  sheetName = "ForgotPassword";
 	requestBody = ForgotPasswordPayload.buildPasswordRequest(sheetName, scenarioType);
 	
+
 }
 
 @Then("Admin receives statusCode {int} with response message {string}")

@@ -17,7 +17,12 @@ public class CommonUtility {
 	    public static Response response;
 	    public static LoginPojo login = new LoginPojo();
 		public static String token;
+
 		public static String newPassword;
+
+		public static int programId;
+		public static String programName;
+
 		
 		
 		public static String getNewPassword() {
