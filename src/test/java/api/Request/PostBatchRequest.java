@@ -3,6 +3,7 @@ import api.BaseClass.BaseClass;
 import api.Payload.BatchPayload;
 import api.Payload.ProgramPayload;
 import api.Utilities.CommonUtility;
+import api.Utilities.LoggerLoad;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -16,6 +17,8 @@ public class PostBatchRequest extends BaseClass {
 
     public Response PostNewBatchRequest(String Scenario) {
 
+        LoggerLoad.info("Scenario Name: " + Scenario);
+
         if (Scenario.toLowerCase().contains("invalid endpoint")) {
             endpoint = "/invalidEndpoint";
         }
@@ -27,6 +30,9 @@ public class PostBatchRequest extends BaseClass {
             token = "Bearer InvalidToken";
 
         }
+
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + method);
 
         response = given()
                 .spec(requestSpec)

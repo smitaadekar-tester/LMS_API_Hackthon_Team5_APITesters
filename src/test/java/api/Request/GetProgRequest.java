@@ -2,6 +2,7 @@ package api.Request;
 
 import api.BaseClass.BaseClass;
 import api.Utilities.CommonUtility;
+import api.Utilities.LoggerLoad;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
@@ -30,6 +31,9 @@ public class GetProgRequest extends BaseClass {
             token = "Bearer InvalidToken";
         }
 
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + Method);
+
         response = given()
                     .spec(requestSpec)
                     .header("Authorization", token)
@@ -45,6 +49,7 @@ public class GetProgRequest extends BaseClass {
     }
 
     public Response getProgramById(String Scenario) {
+        LoggerLoad.info("Scenario Name: " + Scenario);
         String endpoint = CommonUtility.endpoints.getString("getProgramById") + CommonUtility.programId;
         String token = "Bearer " + CommonUtility.token;
 
@@ -73,6 +78,8 @@ public class GetProgRequest extends BaseClass {
             default:
                 throw new RuntimeException("Unknown scenario: " + Scenario);
         }
+
+        LoggerLoad.info("Endpoint: " + endpoint);
 
         response = given()
                 .spec(requestSpec)

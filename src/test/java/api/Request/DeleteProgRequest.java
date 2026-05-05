@@ -3,6 +3,7 @@ package api.Request;
 import api.BaseClass.BaseClass;
 import api.Payload.ProgramPayload;
 import api.Utilities.CommonUtility;
+import api.Utilities.LoggerLoad;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -10,7 +11,7 @@ import static io.restassured.RestAssured.given;
 public class DeleteProgRequest extends BaseClass {
 
     public Response deleteProgramById(String Scenario) {
-
+        LoggerLoad.info("Scenario Name: " + Scenario);
         String endpoint = CommonUtility.endpoints.getString("deleteProgramById") + CommonUtility.programId;
         String token = "Bearer " + CommonUtility.token;
         String method = "DELETE";
@@ -41,6 +42,9 @@ public class DeleteProgRequest extends BaseClass {
                 throw new RuntimeException("Unknown scenario: " + Scenario);
         }
 
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + method);
+
         response = given()
                 .spec(requestSpec)
                 .header("Authorization", token)
@@ -58,6 +62,7 @@ public class DeleteProgRequest extends BaseClass {
     }
     //***************************************************************************************
     public Response deleteProgramByName(String Scenario) {
+        LoggerLoad.info("Scenario Name: " + Scenario);
 
         String endpoint = CommonUtility.endpoints.getString("deleteProgramByName") + CommonUtility.programName;
         String token = "Bearer " + CommonUtility.token;
@@ -89,6 +94,9 @@ public class DeleteProgRequest extends BaseClass {
             default:
                 throw new RuntimeException("Unknown scenario: " + Scenario);
         }
+
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + method);
 
         response = given()
                 .spec(requestSpec)

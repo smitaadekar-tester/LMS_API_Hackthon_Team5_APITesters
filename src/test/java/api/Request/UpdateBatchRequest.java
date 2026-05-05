@@ -3,6 +3,7 @@ package api.Request;
 import api.BaseClass.BaseClass;
 import api.Payload.BatchPayload;
 import api.Utilities.CommonUtility;
+import api.Utilities.LoggerLoad;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -12,6 +13,8 @@ import static io.restassured.RestAssured.given;
 public class UpdateBatchRequest extends BaseClass {
 
     public Response updateBatchByBatchId(String Scenario) {
+
+        LoggerLoad.info("Scenario Name: " + Scenario);
 
         String endpoint = CommonUtility.endpoints.getString("updateBatchByBatchId") + CommonUtility.batchId;
         String token = "Bearer " + CommonUtility.token;
@@ -37,6 +40,9 @@ public class UpdateBatchRequest extends BaseClass {
         if (Scenario.equalsIgnoreCase("invalid content type")) {
             contentType = ContentType.TEXT;
         }
+
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + method);
 
         response = given()
                 .spec(requestSpec)

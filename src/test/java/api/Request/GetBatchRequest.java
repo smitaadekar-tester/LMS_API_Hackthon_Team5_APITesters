@@ -2,6 +2,7 @@ package api.Request;
 
 import api.BaseClass.BaseClass;
 import api.Utilities.CommonUtility;
+import api.Utilities.LoggerLoad;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -26,6 +27,9 @@ public class GetBatchRequest extends BaseClass {
         token = "Bearer InvalidToken";
     }
 
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + Method);
+
     response = given()
                     .spec(requestSpec)
                     .header("Authorization", token)
@@ -41,6 +45,8 @@ public class GetBatchRequest extends BaseClass {
 }
 
     public Response getBatch(String requestType, String scenario) {
+
+        LoggerLoad.info("Scenario: " + scenario);
 
         String endpoint = "";
         String token = "Bearer " + CommonUtility.token;
@@ -95,6 +101,9 @@ public class GetBatchRequest extends BaseClass {
         System.out.println("Method: " + method);
         System.out.println("Endpoint: " + endpoint);
         System.out.println("Token: " + token);
+
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + method);
 
         response = given()
                 .spec(requestSpec)

@@ -2,6 +2,7 @@ package api.Request;
 
 import api.BaseClass.BaseClass;
 import api.Utilities.CommonUtility;
+import api.Utilities.LoggerLoad;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -9,7 +10,7 @@ import static io.restassured.RestAssured.given;
 public class DeleteBatchRequest extends BaseClass {
 
     public Response deleteBatchByBatchId(String Scenario) {
-
+        LoggerLoad.info("Scenario Name: " + Scenario);
         String endpoint = CommonUtility.endpoints.getString("deleteBatchByBatchId") + CommonUtility.batchId;
         String token = "Bearer " + CommonUtility.token;
         String method = "DELETE";
@@ -39,6 +40,9 @@ public class DeleteBatchRequest extends BaseClass {
             default:
                 throw new RuntimeException("Unknown scenario: " + Scenario);
         }
+
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + method);
 
         response = given()
                 .spec(requestSpec)

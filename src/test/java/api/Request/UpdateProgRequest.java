@@ -3,6 +3,7 @@ package api.Request;
 import api.BaseClass.BaseClass;
 import api.Payload.ProgramPayload;
 import api.Utilities.CommonUtility;
+import api.Utilities.LoggerLoad;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
@@ -14,6 +15,8 @@ public class UpdateProgRequest extends BaseClass {
         String endpoint = CommonUtility.endpoints.getString("updateProgramById") + CommonUtility.programId;
         String token = "Bearer " + CommonUtility.token;
         String method = "PUT";
+
+        LoggerLoad.info("Scenario Name: " + Scenario);
 
         if (Scenario.toLowerCase().contains("no request body")) {
             response = given()
@@ -44,6 +47,9 @@ public class UpdateProgRequest extends BaseClass {
         if (Scenario.toLowerCase().contains("invalid program id")) {
             endpoint = CommonUtility.endpoints.getString("updateProgramById") + "99999";
         }
+
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + method);
 
         response = given()
                 .spec(requestSpec)

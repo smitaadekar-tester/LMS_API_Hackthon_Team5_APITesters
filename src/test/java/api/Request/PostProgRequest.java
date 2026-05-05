@@ -2,6 +2,7 @@ package api.Request;
 import api.BaseClass.BaseClass;
 import api.Payload.ProgramPayload;
 import api.Utilities.CommonUtility;
+import api.Utilities.LoggerLoad;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -15,6 +16,8 @@ public class PostProgRequest extends BaseClass {
 
     public Response PostProgramRequest(String Scenario) {
 
+        LoggerLoad.info("Scenario Name: " + Scenario);
+
         if (Scenario.equalsIgnoreCase("invalid endpoint")) {
             endpoint = "/invalidEndpoint";
         }
@@ -26,6 +29,9 @@ public class PostProgRequest extends BaseClass {
             token = "Bearer InvalidToken";
 
         }
+
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + method);
 
         response = given()
                 .spec(requestSpec)
@@ -50,9 +56,15 @@ public class PostProgRequest extends BaseClass {
 
     public Response createProgramForDeleteSetup(String Scenario) {
 
+        LoggerLoad.info("Scenario Name: " + Scenario);
+
          endpoint = CommonUtility.endpoints.getString("postProgram");
          token = "Bearer " + CommonUtility.token;
          method = "POST";
+
+        LoggerLoad.info("Endpoint: " + endpoint);
+        LoggerLoad.info("Request Method: " + method);
+
         response = given()
                 .spec(requestSpec)
                 .header("Authorization", token)
