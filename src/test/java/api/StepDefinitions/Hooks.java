@@ -19,6 +19,8 @@ public class Hooks extends BaseClass {
 	public static void afterAll() {
 		System.out.println("Program ID: " + CommonUtility.programId);
 		System.out.println("Program Name: " + CommonUtility.programName);
+		System.out.println("Batch ID: " + CommonUtility.batchId);
+		System.out.println("Batch Name: " + CommonUtility.batchName);
 	}
 	
 //	 @AfterAll

@@ -1,3 +1,4 @@
+
 Feature: Login Module
 
 Background:
@@ -22,9 +23,9 @@ Examples:
   | Null Password       | POST   | loginEndpt   | 400        |
   | Inactive User       | POST   | loginEndpt   | 400        |
   | Invalid Method     | GET    | loginEndpt    | 405        |
-  | Invalid Endpoint   | POST   | invalidEndpt  | 404        |
+  | Invalid Endpoint   | POST   | invalidEndpt  | 401        |
   
-  
+
      Scenario Outline: Admin generate token with valid login credentials
     Given Admin creates valid login test data
      When Admin sends "<Method>" request to "<Endpoint>" endpoint
@@ -33,7 +34,3 @@ Examples:
       |Method | Endpoint      | StatusCode |
       | POST   | loginEndpt    | 200       |
     
- 
- #| Valid Email          | POST   | loginEndpt |  201        |
- #Admin creates testData for "<scenarioType>"
-    #

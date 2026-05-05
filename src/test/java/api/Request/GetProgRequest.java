@@ -11,15 +11,6 @@ public class GetProgRequest extends BaseClass {
 
     public Response GetProgramRequest(String Method, String EndpointType, String TokenType, boolean withUsers) {
 
-    /*    response = given()
-                   .spec(requestSpec)
-                   .header("Authorization", "Bearer " + CommonUtility.token)
-                   .when().get(CommonUtility.endpoints.getString("getPrograms"))
-                   .then()
-                   .log().all()
-                   .extract().response();
-
-      //  response.prettyPrint();*/
         String endpoint;
         String token;
 
@@ -67,11 +58,15 @@ public class GetProgRequest extends BaseClass {
                 endpoint = "/invalidProgramEndpoint/" + CommonUtility.programId;
                 break;
 
-            case "without authorization":
+            case "invalid token":
                 token = "Bearer InvalidToken";
                 break;
 
             case "valid program id":
+                endpoint = CommonUtility.endpoints.getString("getProgramById") + CommonUtility.programId;
+                break;
+
+            case "invalid baseuri":
                 endpoint = CommonUtility.endpoints.getString("getProgramById") + CommonUtility.programId;
                 break;
 

@@ -16,9 +16,6 @@ public class ProgramPayload {
         System.out.println("Excel Data Map: " + data);
 
         ProgramPojo programPojo = new ProgramPojo();
-       // programPojo.setProgramName(CommonUtility.endpoints.getString("programName"));
-       // programPojo.setProgramDescription(CommonUtility.endpoints.getString("programDescription"));
-       // programPojo.setProgramStatus(CommonUtility.endpoints.getString("programStatus"));
         if (data.get("programName") != null && !data.get("programName").isEmpty()) {
             programPojo.setProgramName(data.get("programName"));
         }

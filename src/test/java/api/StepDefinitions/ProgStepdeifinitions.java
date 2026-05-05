@@ -1,40 +1,36 @@
 package api.StepDefinitions;
 
+import api.BaseClass.BaseClass;
+import api.Payload.LoginPayload;
+import api.Pojo.LoginPojo;
 import api.Request.*;
 import api.Utilities.CommonUtility;
+import api.Utilities.LoggerLoad;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 
-public class ProgStepdeifinitions {
+import static org.testng.Assert.assertEquals;
+
+public class ProgStepdeifinitions extends BaseClass {
 
     PostLoginRequest loginReq = new PostLoginRequest();
     GetProgRequest progReq = new GetProgRequest();
     PostProgRequest postProgReq = new PostProgRequest();
     DeleteProgRequest deleteProgReq = new DeleteProgRequest();
     UpdateProgRequest updateProgReq = new UpdateProgRequest();
-    Response response;
 
+    @Given("Admin generates valid token")
+    public void admin_generates_valid_token() {
 
-    @Given("Admin sets Authorization to Bearer Token")
-    public void adminSetsAuthorizationToBearerToken() {
-        if (CommonUtility.token == null || CommonUtility.token.isEmpty()) {
-            loginReq.postLoginrequest();
+        if (CommonUtility.getToken() == null) {
+
+            LoginPojo requestBody = LoginPayload.buildValidLoginRequest();
+            loginReq.sendLoginRequest("POST", "loginEndpt", requestBody, "NoAuth");
         }
     }
 
-   /* @When("Admin sends GET request to get all programs")
-    public void admin_sends_get_request_to_get_all_programs() {
-        response = progReq.GetProgRequest();
-
-    }
-
-    @Then("Admin receives 200 OK status with list of programs")
-    public void admin_receives_200_ok_status_with_list_of_programs() {
-        response.then().statusCode(200);
-
-    }*/
 
     @When("Admin sends POST request to create new program using {string}")
     public void adminSendsPOSTRequestToCreateNewProgramUsing(String Scenario) {
@@ -42,9 +38,12 @@ public class ProgStepdeifinitions {
     }
 
     @Then("Admin receives {int} status code")
-    public void adminReceivesCreatedStatusWithResponseBody(int StatusCode) {
+    public void adminReceivesCreatedStatusWithResponseBody(int expectedStatusCode) {
 
-        response.then().statusCode(StatusCode);
+        int actualStatusCode = response.getStatusCode();
+        LoggerLoad.info("Expected StatusCode: " + expectedStatusCode);
+        LoggerLoad.info("Actual StausCode: " + actualStatusCode);
+        assertEquals(expectedStatusCode, actualStatusCode);
     }
 
     @When("Admin sends {string} request to get all programs with {string} endpoint and {string} token")

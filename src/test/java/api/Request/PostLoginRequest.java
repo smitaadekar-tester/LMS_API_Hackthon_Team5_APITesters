@@ -32,7 +32,9 @@ public class PostLoginRequest extends BaseClass {
 		} else if (authType.equalsIgnoreCase("ExpiredToken")) {
 		    request.header("Authorization", "Bearer expired_token");
 		}
-		request.body(payload);
+		if (payload != null) {
+	         request.body(payload);
+	  }
 		switch (method.toUpperCase()) {
 		
 		case "POST":
@@ -56,11 +58,6 @@ public class PostLoginRequest extends BaseClass {
 	        }
 	    }
 	    
-//	    if (endpoint.equalsIgnoreCase("loginEndpt")) {
-//	        CommonUtility.token = json.getString("token");
-//	    }
-	   // CommonUtility.token = json.getString("token");
-     
 	}
 
 	public int getStatusCode() {

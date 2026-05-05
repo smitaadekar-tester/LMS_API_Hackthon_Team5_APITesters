@@ -22,9 +22,10 @@ public class CommonUtility {
 
 		public static int programId;
 		public static String programName;
+	    public static int batchId;
+	    public static String batchName;
+	    public static int inactiveBatchId= 5627;
 
-		
-		
 		public static String getNewPassword() {
 			return newPassword;
 		}

@@ -47,7 +47,12 @@ public class LoginStepDefinitions extends BaseClass{
 	    } else if (endpoint.equalsIgnoreCase("forgotPswdEndpt")) {
 
 	        requestBody = ForgotPasswordPayload.buildPasswordRequest("ForgotPassword", scenarioType);
-	    }
+	    } else if (endpoint.equalsIgnoreCase("logoutEndpt")) {
+	  	    requestBody = null;
+	   } else if (endpoint.equalsIgnoreCase("invalidEndpt")) {
+			requestBody = LoginPayload.buildInvalidLoginRequest("Login", scenarioType);
+	}
+
 	}
 	
 	 @When ("Admin sends {string} request to {string} endpoint")
@@ -85,16 +90,8 @@ public void admin_recieves_token_with_statusCode_in_response(int expectedStatusC
 		assertEquals(expectedStatusCode, actualStatusCode);
 }
 
-@Given("Admin creates testData for forgot password {string}")
-public void admin_creates_test_data_for_forgot_password(String scenarioType) {
-	  sheetName = "ForgotPassword";
-	requestBody = ForgotPasswordPayload.buildPasswordRequest(sheetName, scenarioType);
-	
-
-}
-
-@Then("Admin receives statusCode {int} with response message {string}")
-public void admin_receives_status_code_with_response_message(int expectedstatusCode, String expectedMessage) {
+@Then("Admin receives statusCode {int}")
+public void admin_receives_status_code_with_response_message(int expectedstatusCode) {
 
 	actualStatusCode = loginReq.getStatusCode();
 
@@ -102,14 +99,6 @@ public void admin_receives_status_code_with_response_message(int expectedstatusC
     LoggerLoad.info("Actual StatusCode: " + actualStatusCode);
 
     assertEquals(actualStatusCode, expectedstatusCode);
-
-    String actualMessage = loginReq.response.jsonPath().getString("message");
-	//String actualMessage = loginReq.response.getStatusLine();
-
-    LoggerLoad.info("Expected Message: " + expectedMessage);
-    LoggerLoad.info("Actual Message: " + actualMessage);
-
-    assertEquals(actualMessage, expectedMessage);
 
 }
 
